@@ -98,11 +98,18 @@ It guides the user through a brief setup, runs a short interview with streamed m
 
 ```
 .
-├─ app.py                # Streamlit app (single file)
-├─ requirements.txt      # Minimal, pinned dependencies (see below)
+├─ app.py                # Streamlit app (main entrypoint)
+├─ requirements.txt      # Minimal, pinned dependencies
 ├─ .gitignore            # Keeps secrets & caches out of version control
-└─ README.md
+├─ README.md             # Project documentation
+├─ LICENSE               # MIT license
+├─ tests/                # Smoke tests
+│   └─ test_import.py
+└─ .github/
+    └─ workflows/
+        └─ ci.yml        # GitHub Actions workflow (CI)
 ```
+
 
 ---
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="de48498c-54cc-4bfc-95e5-f32b32532316" />
+  <component name="Black">
+    <option name="sdkName" value="llms_course_env" />
   </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="llms_course_env" project-jdk-type="Python SDK" />
 </project>
