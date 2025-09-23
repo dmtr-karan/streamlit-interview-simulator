@@ -64,6 +64,8 @@ defaults = {
     "openai_model": "gpt-4.1-mini",
     # Stop-control state
     "stop_requested": False,
+    # mark if Stop was pressed before any user message
+    "stopped_early": False,
 }
 for k, v in defaults.items():
     if k not in st.session_state:
@@ -81,8 +83,11 @@ def show_feedback() -> None:
 
 
 def request_stop() -> None:
-    """Stop interview; flag early stop if no user messages."""
+    """Stop interview; flag early stop if no user messages and end immediately."""
     st.session_state.stop_requested = True
+    if st.session_state.user_message_count == 0:
+        st.session_state.stopped_early = True
+    st.session_state.chat_complete = True
 
 
 # ---------- Setup stage ----------
@@ -205,6 +210,9 @@ if st.session_state.setup_complete and not st.session_state.feedback_shown and n
         )
         if isinstance(esc_signal, list) and len(esc_signal) == 2 and esc_signal[1] == "STOP_REQUESTED":
             st.session_state.stop_requested = True
+            if st.session_state.user_message_count == 0:
+                st.session_state.stopped_early = True
+            st.session_state.chat_complete = True
     except Exception:
         pass  # Non-fatal if JS eval is unavailable
 
@@ -263,12 +271,32 @@ if st.session_state.setup_complete and not st.session_state.feedback_shown and n
         st.session_state.chat_complete = True
 
 # ---------- Get Feedback ----------
-if st.session_state.chat_complete and not st.session_state.feedback_shown:
+if (
+    st.session_state.chat_complete
+    and not st.session_state.feedback_shown
+    and not st.session_state.stopped_early
+    and st.session_state.user_message_count > 0
+):
     if st.button("Get Feedback", on_click=show_feedback):
         st.write("Fetching feedback...")
 
+if (
+    st.session_state.chat_complete
+    and not st.session_state.feedback_shown
+    and st.session_state.stopped_early
+):
+    st.info("Interview was stopped before it began.", icon="🛑")
+    if st.button("Restart Interview", type="primary", key="restart_early"):
+        streamlit_js_eval(js_expressions="parent.window.location.reload()")
+
 # ---------- Feedback screen ----------
 if st.session_state.feedback_shown:
+    if st.session_state.stopped_early or st.session_state.user_message_count == 0:
+        st.info("Interview was stopped before it began. No feedback available.")
+        # Optional: also offer Restart here as a fallback (won't normally hit due to gating above)
+        if st.button("Restart Interview", type="primary", key="restart_guard"):
+            streamlit_js_eval(js_expressions="parent.window.location.reload()")
+        st.stop()
     st.subheader("Feedback")
 
     conversation_history = "\n".join(
