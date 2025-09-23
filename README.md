@@ -56,13 +56,35 @@ It guides the user through a brief setup, runs a short interview with streamed m
 ## Deployment (Streamlit Community Cloud)
 
 1. Push this repo to **public GitHub** (required by Community Cloud).
-2. Go to https://share.streamlit.io → **New app**.
+2. Go to [share.streamlit.io](https://share.streamlit.io) → **New app**.
 3. Select your repo, branch (`main`), and file path (`app.py`).
-4. **Advanced settings → Secrets**:
-   ```ini
-   OPENAI_API_KEY="sk-your-key"
+4. Under **Advanced settings → Secrets**, add your OpenAI key in TOML format:
+   ```toml
+   OPENAI_API_KEY = "sk-your-key"
    ```
-5. Deploy. The app will build, then provide a shareable URL.
+5. Deploy. The app will build and provide a shareable URL.
+
+---
+
+## Live Demo
+
+The app is deployed on **Streamlit Community Cloud** and available here:  
+👉 [Streamlit Interview Simulator](https://app-interview-simulator-s7xbznmmq5uhrfukc4wyjf.streamlit.app/)
+
+---
+
+## Demo Screenshots
+
+**Setup Screen**  
+Candidate provides personal details, experience, skills, and selects target role/company.  
+
+![Setup screen](./assets/demo_setup.png)
+
+**Interview in Action**  
+The candidate introduces themselves, the interviewer responds with a contextual question,  
+and the red **Stop** button is visible for early-stop control.  
+
+![Interview demo](./assets/demo_conversation.png)
 
 ---
 
