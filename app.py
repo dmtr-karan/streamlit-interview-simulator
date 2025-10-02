@@ -15,6 +15,20 @@ from streamlit_js_eval import streamlit_js_eval
 
 # ---------- Page config ----------
 st.set_page_config(page_title="StreamlitChatMessageHistory", page_icon="💬")
+# ---------- UI polish ----------
+st.markdown(
+    """
+    <style>
+    section[data-testid="stSidebar"] {
+        width: 200px !important;   /* default is ~250px */
+    }
+    section[data-testid="stSidebar"] > div {
+        width: 200px !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 st.title("Chatbot")
 st.caption("A minimal Streamlit interview simulator using OpenAI with Stop + feedback flow.")
 
