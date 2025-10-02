@@ -170,22 +170,16 @@ if st.session_state.setup_complete and not st.session_state.feedback_shown and n
                 st.markdown(message["content"])
 
     # ---------- Stop controls (button + ESC) ----------
-    # Place Stop button on the right side of the greeting/info row
-    cols = st.columns([6, 1])  # wide left (info), narrow right (button)
-    with cols[1]:
-        st.markdown(
-            """
-            <style>
-            div[data-testid="stButton"] button {
-                background-color: #e63946; /* red */
-                color: white;
-                border-radius: 6px;
-            }
-            </style>
-            """,
-            unsafe_allow_html=True,
+    # ---------- Controls (sidebar) ----------
+    with st.sidebar:
+        st.markdown("### Controls")
+        st.button(
+            "🛑 Stop",
+            on_click=request_stop,
+            key="stop_btn",
+            help="Stop the current response",
+            disabled=st.session_state.get("stop_requested", False)
         )
-        st.button("Stop", on_click=request_stop, help="Stop the current response")
 
     # ESC key listener via streamlit_js_eval (best-effort; safe to ignore if unsupported)
     try:
