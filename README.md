@@ -165,10 +165,10 @@ streamlit-js-eval>=0.1.7
 
 ---
 
-## Acknowledgments
+**Acknowledgments**
 
-This project originated as part of *The AI Engineer Course 2025: Complete AI Engineer Bootcamp (Udemy)*.  
-It has since been refined and deployed independently, with added functionality and deployment polish for portfolio use.
+Originally developed during *The AI Engineer Course 2025 (Udemy)*.  
+Now actively maintained as a public, open-source project.
 
 ---
 
