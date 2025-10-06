@@ -119,17 +119,23 @@ and the red **Stop** button is visible for early-stop control.
 ## Project Structure
 
 ```
-.
-├─ app.py                # Streamlit app (main entrypoint)
-├─ requirements.txt      # Minimal, pinned dependencies
-├─ .gitignore            # Keeps secrets & caches out of version control
-├─ README.md             # Project documentation
-├─ LICENSE               # MIT license
-├─ tests/                # Smoke tests
-│   └─ test_import.py
-└─ .github/
-    └─ workflows/
-        └─ ci.yml        # GitHub Actions workflow (CI)
+streamlit-interview-simulator/
+├─ .github/
+│  └─ workflows/
+│     └─ ci.yml                       # GitHub Actions workflow (CI)
+├─ .idea/                              # IDE config (PyCharm)
+├─ assets/
+│  ├─ demo_conversation.png           # 1378×1003 conversation view (README demo)
+│  ├─ demo_setup.png                  # 877×1134 setup view (README demo)
+│  └─ interview_social.png            # 1280×640 conversation view (GitHub/LinkedIn social preview)
+├─ tests/                               # Smoke tests
+│  └─ test_import.py
+├─ .gitignore                           # Keeps secrets & caches out of version control
+├─ LICENSE                              # MIT license
+├─ README.md                            # Project documentation
+├─ app.py                               # Streamlit app (main entrypoint)
+└─ requirements.txt                     # Minimal, pinned dependencies
+
 ```
 
 
